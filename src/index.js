@@ -3,11 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App/App';
 import reportWebVitals from './reportWebVitals';
+import Store from "./App/Store";
+import {Provider} from "react-redux"
+import store from "./App/Store";
+import {fetchCDs} from "./Slices/CDSlice";
+
+store.dispatch(fetchCDs)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+      <Provider store={Store}>
+          <App />
+      </Provider>
   </React.StrictMode>
 );
 
