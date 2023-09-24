@@ -7,9 +7,6 @@ const Homepage = () => {
 
 	// selectors
 	const cdSelect = useSelector((state) => state.CDSlice.cds)
-	const cds_Error = useSelector((state) => state.CDSlice.error);
-	const cds_Status = useSelector((state) => state.CDSlice.status);
-
 
 	console.table(cdSelect)
 
@@ -17,7 +14,10 @@ const Homepage = () => {
 		<>
 			<div>
 				<p>Homepage</p>
-				<div className={"flex flex-row justify-center flex-wrap"}>
+				<div className={window.innerWidth > 750 ? "flex flex-wrap flex-row justify-around" +
+					" justify-items-center" : "flex" +
+					" flex-wrap" +
+					" flex-col justify-items-center justify-around"}>
 					{cdSelect.map((item) => <CDThumbnail key={item.id} artist={item.artist} title={item.title} cover={item.cover}/>)}
 				</div>
 			</div>

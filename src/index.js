@@ -7,16 +7,22 @@ import Store from "./App/Store";
 import {Provider} from "react-redux"
 import store from "./App/Store";
 import {fetchCDs} from "./Slices/CDSlice";
+import {DevSupport} from "@react-buddy/ide-toolbox";
+import {ComponentPreviews, useInitial} from "./dev";
 
 store.dispatch(fetchCDs)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-      <Provider store={Store}>
-          <App />
-      </Provider>
-  </React.StrictMode>
+	<React.StrictMode>
+		<Provider store={Store}>
+			<DevSupport ComponentPreviews={ComponentPreviews}
+			            useInitialHook={useInitial}
+			>
+				<App/>
+			</DevSupport>
+		</Provider>
+	</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
