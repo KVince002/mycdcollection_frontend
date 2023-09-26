@@ -1,3 +1,4 @@
+// This is thumbnail for the Homepage's grid
 const CDThumbnail = (props) => {
 	const {artist, title, cover, key} = props;
 	return (
