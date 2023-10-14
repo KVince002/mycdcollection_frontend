@@ -39,12 +39,6 @@ export async function fetchCDs(dispatch, getState){
 
 console.log(slice)
 
-// selectors
-// todo: reprair selectors
-export const selectAllCDs = (state) => state.cds;
-export const  selectCDSliceError = (state) => state.error;
-export const  selectCDSliceStatus = (state) => state.status;
-
 //actions
 export const {manipulateCDs, addCDs} = slice.actions;
 export default slice.reducer;
