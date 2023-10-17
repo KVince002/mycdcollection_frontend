@@ -1,6 +1,7 @@
 // This is thumbnail for the Homepage's grid
 const CDThumbnail = (props) => {
 	const {artist, title, cover, key} = props;
+
 	return (
 		<div className="flex flex-col justify-center">
 			<img key={key} className="order-first rounded-md w-24 md:w-44 lg:w-60 hover:shadow-lg hover:shadow-ctp-sapphire" src={cover} alt={`Cover art for ${artist} - ${title} album`}/>

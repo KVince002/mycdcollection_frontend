@@ -2,6 +2,7 @@
 const CDView = (props) => {
 
 	return(
+
 		<>
 			<p>Views of the cd</p>
 		</>
