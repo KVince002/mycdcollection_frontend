@@ -7,12 +7,8 @@ function App() {
   return (
       <BrowserRouter>
         <Routes>
-          <Route path='/' index element={<Homepage/>}>
-{/*
-              Importing CDView for the route}
-*/}
-              <Route path="disk/:id" element={<CDView/>}></Route>
-          </Route>
+          <Route path='/' index element={<Homepage/>}/>
+            <Route path="/disk/:id" element={<CDView/>}/>
         </Routes>
       </BrowserRouter>
   );
