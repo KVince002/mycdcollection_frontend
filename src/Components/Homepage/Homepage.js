@@ -18,7 +18,7 @@ const Homepage = () => {
 					" justify-items-center" : "flex" +
 					" flex-wrap" +
 					" flex-col justify-items-center justify-around"}>
-					{cdSelect.map((item) => <CDThumbnail key={item.id} artist={item.artist} title={item.title} cover={item.cover}/>)}
+					{cdSelect.map((item) => <CDThumbnail key={item.id} artist={item.artist} title={item.title} cover={item.cover} id={item.id}/>)}
 				</div>
 			</div>
 		</>
