@@ -13,7 +13,6 @@ const Homepage = () => {
 	return (
 		<>
 			<div>
-				<p>Homepage</p>
 				<div className={window.innerWidth > 750 ? "flex flex-wrap flex-row justify-around" +
 					" justify-items-center" : "flex" +
 					" flex-wrap" +
