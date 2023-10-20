@@ -47,21 +47,20 @@ const slice = createSlice({
 		console.log("Inside CDSlice > slice > reducers > addCDs")
 	    state.cds = action.payload;
     },
-	  redirectCDView: (state, action)=> {
-		console.log("Inside CDSlice > slice > reducers > redirectCDView");
+	  specCDSetter: (state, action)=> {
+		console.log("Inside CDSlice > slice > reducers > specCDSetter");
 		  /*
 		  * // Todo: Get the right payload and with query and pass the information to the CDView the render it!
 		  * */
+		  console.log(action.payload);
 		// reset the cdSpec array first
 		  state.cdSpec = [];
 		  // give the data to it
 		  state.cdSpec = action.payload;
-	  }
+	  },
   }
 })
 
-console.log(slice)
-
 //actions
-export const {manipulateCDs, addCDs} = slice.actions;
+export const {addCDs, specCDSetter} = slice.actions;
 export default slice.reducer;
