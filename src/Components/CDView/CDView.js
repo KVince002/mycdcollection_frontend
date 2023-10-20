@@ -14,15 +14,15 @@ const CDView = (props) => {
 	console.table(actualCD)
 
 	return(
-		<div>
-			<div>
-			<img src={actualCD[0].cover} alt={`This is a cover of ${actualCD[0].title} by ${actualCD[0].artist}`} id={"coverImg"} loading={"eager"}/>
+		<div className={"flex flex-row flex-nowrap justify-center overflow-x-auto w-auto h-screen macchiato"}>
+			<div className={"order-1 m-4"}>
+			<img className={"w-auto h-full max-h-screen object-scale-down"} src={actualCD[0].cover} alt={`This is a cover of ${actualCD[0].title} by ${actualCD[0].artist}`} id={"coverImg"} loading={"eager"}/>
 			</div>
-			<div>
-			<h1>{actualCD[0].title}</h1>
-			<h2>{actualCD[0].artist}</h2>
-			<h3>{actualCD[0].releasedate}</h3>
-			<h3>{actualCD[0].genre}</h3>
+			<div className={"order-2 space-y-2 m-4"}>
+			<h1 className={"text-5xl text-ctp-lavender"}>{actualCD[0].title}</h1>
+			<h2 className={"text-2xl text-ctp-mauve"}>{actualCD[0].artist}</h2>
+			<h3 className={"text-xl text-ctp-peach"}>{actualCD[0].releasedate}</h3>
+			<h3 className={"text-xl text-ctp-peach"}>{actualCD[0].genre}</h3>
 			</div>
 		</div>
 	)
