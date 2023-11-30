@@ -1,12 +1,13 @@
 // slice for the cds
-import {createSlice} from "@reduxjs/toolkit"
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
+import thunk from "redux-thunk";
 
 // initialState
 const initialState={
 	// all the cds
   cds: [],
-	// specific cd
-	cdSpec: [],
+	// specific cd's details
+	details: [],
 	// status *unused yet*
   status: "idle" | "pending" | "fulfilled" | "rejected",
 	// error *unused yet*
@@ -29,13 +30,15 @@ export async function fetchCDs(dispatch, getState){
       .catch((err) => console.error(err))
 }
 
-// Accrue a specific song info from server
-export async function fetchCDInfo(dispatch, getState, cdItem) {
-	await fetch("http://localhost:3001/cds/"+cdItem)
-		.then((res)=> res.json())
-		.then((data)=> dispatch({type: "CDs/redirectCDView", payload: data}))
-		.catch((error)=> console.error(error))
-}
+// async thunk for the specific cd data
+export const CDDetails = createAsyncThunk(
+	"cdDetails",
+	async (cdId: cdItem, thunkAPI) =>{
+		const response = await fetch("http://localhost:3001/cds/:cdItem")
+		return response.data
+	}
+)
+
 
 // slice
 // todo: "normalize"
@@ -47,18 +50,26 @@ const slice = createSlice({
 		console.log("Inside CDSlice > slice > reducers > addCDs")
 	    state.cds = action.payload;
     },
-	  specCDSetter: (state, action)=> {
-		console.log("Inside CDSlice > slice > reducers > specCDSetter");
-		  /*
-		  * // Todo: Get the right payload and with query and pass the information to the CDView the render it!
-		  * */
-		  console.log(action.payload);
-		// reset the cdSpec array first
-		  state.cdSpec = [];
-		  // give the data to it
-		  state.cdSpec = action.payload;
-	  },
-  }
+  },
+	extraReducers: (builder) => {
+	  builder.addCase(CDDetails.fulfilled, (state, action) => {
+		  // CDDetails fulfilled
+		  console.log("This action: "+action+ " is fulfilled")
+		  // Push new cd details
+		  console.log(action.payload)
+		  state.details.push(action.payload)
+		  state.status = "fulfilled"
+	  })
+		  .addCase(CDDetails.pending, (state, action) => {
+			  console.log("This action: "+action+ " is pending")
+			  state.status = "pending"
+			  state.details = [];
+		  })
+		  .addCase(CDDetails.rejected, (state, action) =>{
+			  console.log("This action: "+action+" is rejected")
+			  state.status = "rejected"
+		  })
+	}
 })
 
 //actions
