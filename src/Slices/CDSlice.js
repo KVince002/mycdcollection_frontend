@@ -1,3 +1,4 @@
+
 // slice for the cds
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 import thunk from "redux-thunk";
@@ -34,11 +35,12 @@ export async function fetchCDs(dispatch, getState){
 export const CDDetails = createAsyncThunk(
 	"cdDetails",
 	async (cdId: cdItem, thunkAPI) =>{
-		const response = await fetch("http://localhost:3001/cds/:cdItem")
-		return response.data
+		console.info("CDDetails started")
+		// get the response
+		const response = await fetch(`http://localhost:3001/cds/`+cdId)
+		return response.json()
 	}
 )
-
 
 // slice
 // todo: "normalize"
@@ -53,11 +55,10 @@ const slice = createSlice({
   },
 	extraReducers: (builder) => {
 	  builder.addCase(CDDetails.fulfilled, (state, action) => {
-		  // CDDetails fulfilled
-		  console.log("This action: "+action+ " is fulfilled")
+		  console.log("This action: "+action.type+ " is fulfilled")
+		  console.log(action.payload.rows)
 		  // Push new cd details
-		  console.log(action.payload)
-		  state.details.push(action.payload)
+		  state.details = action.payload.rows;
 		  state.status = "fulfilled"
 	  })
 		  .addCase(CDDetails.pending, (state, action) => {
